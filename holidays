@@ -1,0 +1,42 @@
+# Calculates a user's total holiday cost including plane cost, hotel cost and car-rental cost
+
+def hotel_cost(num_nights, price_per_night):
+    return price_per_night * num_nights
+
+def plane_cost(city_flight, flight_prices):
+    if city_flight in flight_prices:
+        return flight_prices[city_flight]
+    else:
+        return 0  # Default, no flight cost
+    
+def car_rental(rental_days, daily_rental_cost):
+    return daily_rental_cost * rental_days
+    
+def holiday_cost(num_nights, city_flight, rental_days, hotel_price, flight_prices, car_rental_price):
+    total_cost = hotel_cost(num_nights, hotel_price) + plane_cost(city_flight, flight_prices) + car_rental(rental_days, car_rental_price)
+    return total_cost
+
+# Get the users input
+city_flight = input("Enter the city you will be flying to: ")
+num_nights = int(input("Enter the number of nights you will staying at a hotel for: "))
+rental_days = int(input("Enter the number of days you will need a rental car for: "))
+hotel_price = float(input("Enter the price per night for the hotel: $"))
+car_rental_price = float(input("Enter the daily rental cost for the car: $"))
+\
+# Initialize flight prices dictionary
+flight_prices = {}
+
+# Get flight price for chosen Destination
+destination = input(f"Enter the Airport you will be flying to: ")
+price = float(input(f"Enter the total cost for flights {destination}: $"))
+flight_prices[city_flight] = price
+
+# Calculate the total holiday cost for user
+total_cost = holiday_cost(num_nights, city_flight, rental_days, hotel_price, flight_prices, car_rental_price)
+
+# Print holiday details 
+print("\nHoliday Details:")
+print("Destination City:", city_flight)
+print("Number of Nights at the Hotel:", num_nights)
+print("Number of Rental days for Car hire:", rental_days)
+print("Total Holiday Cost: $", total_cost)
